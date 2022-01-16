@@ -1,0 +1,21 @@
+{
+    "name": "jhony/mvc",
+    "description": "Mvc Simples",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/",
+            "App\\":"app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jonatas Miler",
+            "email": "jonatasmiler@gmail.com"
+        }
+    ],
+    "require": {
+        "smarty/smarty": "^4.0",
+        "symfony/dotenv": "^5.4"
+    }
+}

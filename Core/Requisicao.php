@@ -25,6 +25,7 @@ class Requisicao
             $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL);
             // Trata possíveis injections deixando apenas algumas pontuações e alfanumericos
             $url = preg_replace('/([^\.\-\_\/a-z0-9]+)/i', '', $url);
+            $url =  strtolower($url);
             $url = explode('/', $url);
             $this->_navLinks = $url;
             $url = array_filter($url);
@@ -37,11 +38,11 @@ class Requisicao
                 if ($Files->isDir() && $Files->isDot()) {
                     continue;
                 }
-                $this->_modules[] = $Files->getFilename();
+                $this->_modules[] = strtolower($Files->getFilename());
             }
 
             // o último bloco do url é o módulo que queremos chamar
-            $this->_modulo = strtolower(array_shift($url));
+            $this->_modulo = array_shift($url);
 
             if (!$this->_modulo) {
                 $this->_modulo = false;

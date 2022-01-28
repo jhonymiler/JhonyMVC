@@ -1,4 +1,27 @@
-<!-- Page Content-->
+<?php
+/* Smarty version 4.0.3, created on 2022-01-27 20:22:40
+  from 'C:\xampp\htdocs\sistemas\MVC-Simples-com-Composer\App\Modulos\painel\Views\dashboard.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.0.3',
+  'unifunc' => 'content_61f329409c5689_72496209',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '106789bddd22665f1fd12429cc3645c07fa49b9c' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\sistemas\\MVC-Simples-com-Composer\\App\\Modulos\\painel\\Views\\dashboard.tpl',
+      1 => 1643325704,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_61f329409c5689_72496209 (Smarty_Internal_Template $_smarty_tpl) {
+?><!-- Page Content-->
 <div class="container px-4 px-lg-5">
     <!-- Heading Row-->
     <div class="row gx-4 gx-lg-5 align-items-center my-5">
@@ -54,3 +77,5 @@
         </div>
     </div>
 </div>
+<?php }
+}

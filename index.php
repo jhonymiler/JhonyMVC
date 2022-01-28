@@ -7,7 +7,7 @@ use Symfony\Component\Dotenv\Dotenv;
 
 define('DS', DIRECTORY_SEPARATOR); // para não dar conflito em sistemas que não são windows 
 define('RAIZ', realpath(dirname(__FILE__)) . DS); //diretório RAIZ da aplicação
-define('BASE_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/'); // url para postagens
+define('BASE_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/sistemas/MVC-Simples-com-Composer/'); // url para postagens
 
 setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
 date_default_timezone_set('America/Sao_Paulo');

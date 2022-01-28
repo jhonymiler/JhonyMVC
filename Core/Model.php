@@ -2,7 +2,7 @@
 
 namespace Core;
 
-class Model
+abstract class Model
 {
     public $db;
 

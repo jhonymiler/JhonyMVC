@@ -44,6 +44,8 @@ Para usar <JhonyMVC>, siga estas etapas:
 
  - Altere as configurações do arquivo ENV da forma que precisar 
 ```
+# Não esqueça da "/" no final do URL
+BASE_URL=http://localhost/sistemas/MVC-Simples-com-Composer/
 CONTROLE_PATRAO=index
 #template padrão
 DEFAULT_LAYOUT=painel

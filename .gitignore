@@ -1,2 +1,4 @@
 # Arquivos temporário do template Smarty
 /tmp/
+# Composer
+/vendor/

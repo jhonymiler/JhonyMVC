@@ -75,4 +75,45 @@ abstract class Controller
             exit();
         }
     }
+
+    /**
+     * função de encriptação para gerar o toquem que vai ser venviado por email
+     *
+     * @param [String] $str
+     *
+     * @return String
+     */
+    protected function encript($str)
+    {
+        $e = '';
+        $q = strlen($str);
+        for ($i = 0; $i < $q; $i++) {
+            $e .= chr(ceil($q / 57 / 5) ^ ord($str[$i]));
+        }
+        return strtoupper(implode(unpack("H*", $e)));
+    }
+
+
+    /**
+     * função de decriptação, será usado para descriptografar o token enviado por email
+     *
+     * @param [String] $str
+     *
+     * @return String
+     */
+    protected function decript($str)
+    {
+        $e = '';
+        if (ctype_xdigit($str)) {
+            $str = pack("H*", $str);
+            $q = strlen($str);
+            for ($i = 0; $i < $q; $i++) {
+                $e .= chr(ceil($q / 57 / 5) ^ ord($str[$i]));
+            }
+            return $e;
+        } else {
+            Sessao::addMsg('erro', 'Este Token não existe.');
+            return false;
+        }
+    }
 }

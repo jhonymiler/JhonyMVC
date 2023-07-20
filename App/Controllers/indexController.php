@@ -20,7 +20,7 @@ class indexController extends Controller
 
     public function index()
     {
-        $this->_view->assign('titulo', 'Sistema MVC');
+        $this->_view->assign('titulo', 'Cadastro de Cursos');
         $this->_view->addConteudo('home');
         $this->_view->renderizar();
     }

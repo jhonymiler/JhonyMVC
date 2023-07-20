@@ -69,7 +69,7 @@ class Requisicao
         }
 
         if (!$this->_Controller) {
-            $this->_Controller = CONTROLE_PATRAO;
+            $this->_Controller = getenv('CONTROLE_PATRAO');
         }
 
         if (!$this->_metodo) {

@@ -29,7 +29,7 @@ class View extends Smarty
         $this->_itemMenu  = '';
         // determina o cache
         $this->caching = false;
-        $this->setTemplate(DEFAULT_LAYOUT);
+        $this->setTemplate(getenv('DEFAULT_LAYOUT'));
     }
 
     public function getPath($chave)
@@ -56,16 +56,16 @@ class View extends Smarty
         } else {
             $this->_paths['view'] = $this->_paths['template'];
         }
-        $this->_paths['js']   = BASE_URL . 'App' . DS . 'Views' . DS . $this->_template . DS;
+        $this->_paths['js']   = getenv('BASE_URL') . 'App' . DS . 'Views' . DS . $this->_template . DS;
 
         $this->_pgParams = array(
-            'path_layout'  => BASE_URL . 'App' . DS . 'Views/' . DEFAULT_LAYOUT . '/',
-            'path_css'     => BASE_URL . 'App' . DS . 'Views/' . DEFAULT_LAYOUT . '/css/',
-            'path_img'     => BASE_URL . 'App' . DS . 'Views/' . DEFAULT_LAYOUT . '/images/',
-            'path_js'      => BASE_URL . 'App' . DS . 'Views/' . DEFAULT_LAYOUT . '/js/',
+            'path_layout'  => getenv('BASE_URL') . 'App' . DS . 'Views/' . getenv('DEFAULT_LAYOUT') . '/',
+            'path_css'     => getenv('BASE_URL') . 'App' . DS . 'Views/' . getenv('DEFAULT_LAYOUT') . '/css/',
+            'path_img'     => getenv('BASE_URL') . 'App' . DS . 'Views/' . getenv('DEFAULT_LAYOUT') . '/images/',
+            'path_js'      => getenv('BASE_URL') . 'App' . DS . 'Views/' . getenv('DEFAULT_LAYOUT') . '/js/',
             'js'           => $this->_js,
             'js_plugin'    => $this->_jsPlugin,
-            'RAIZ'         => BASE_URL,
+            'RAIZ'         => getenv('BASE_URL'),
             'REAL_PATH'    => RAIZ
         );
 
@@ -127,10 +127,10 @@ class View extends Smarty
     {
         if (is_array($css)) {
             foreach ($css as $k => $script) {
-                array_push($this->_css, BASE_URL . 'App' . DS . 'Views/' . $this->_Controller . '/css/' . $script . '.css');
+                array_push($this->_css, getenv('BASE_URL') . 'App' . DS . 'Views/' . $this->_Controller . '/css/' . $script . '.css');
             }
         } elseif (is_string($css)) {
-            array_push($this->_css, BASE_URL . 'App' . DS . 'Views/' . $this->_Controller . '/css/' . $css . '.css');
+            array_push($this->_css, getenv('BASE_URL') . 'App' . DS . 'Views/' . $this->_Controller . '/css/' . $css . '.css');
         } else {
             throw new \Exception('Erro ao carregar o CSS: ');
         }

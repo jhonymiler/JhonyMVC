@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
-use Core\{Controller, Model, Sessao};
+use Core\Controller;
+
+
 
 /**
  * Description of indexControle

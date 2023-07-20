@@ -1,6 +1,7 @@
 <?php
 
 namespace Core;
+use Symfony\Component\Dotenv\Dotenv;
 
 /**
  * ferramenta para manipulação das sessões da pagina
@@ -15,15 +16,12 @@ class Sessao
     {
         session_start();
         if (!isset($_SESSION)) {
-            $_SESSION['id'] = time();
+            $_SESSION['id'] = getenv('TIME')();
         }
     }
     /**
      *
      * Seta uma nova sessão ou atualiza uma existente
-     *
-     * @param type $chave = chave da sessão
-     * @param type $valor = valor da sessao
      */
     public static function set($chave, $valor)
     {
@@ -34,8 +32,6 @@ class Sessao
      *
      * Pega o valor de uma sessão
      *
-     * @param type $chave = nome da sessão
-     * @return type *
      */
     public static function get($chave)
     {
@@ -51,22 +47,23 @@ class Sessao
     // DERTERMINA O TEMPO DE ACESSO
     public static function tempo()
     {
-        if (!defined('TIME')) {
+        if (!getenv('TIME')) {
             Sessao::addMsg('erro', 'O tempo da sessão não foi definido');
         }
-        if (TIME == 0) {
+        
+        if (getenv('TIME') == 0) {
             return;
         }
         if ($tempo = Sessao::get('tempo')) {
 
-            if (time() - $tempo > (TIME * 60)) {
+            if (getenv('TIME')() - $tempo > (getenv('TIME') * 60)) {
                 Sessao::destroy();
-                header('location:' . BASE_URL . 'login');
+                header('location:' . getenv('BASE_URL') . 'login');
             } else {
-                Sessao::set('tempo', time());
+                Sessao::set('tempo', getenv('TIME')());
             }
         } else {
-            Sessao::set('tempo', time());
+            Sessao::set('tempo', getenv('TIME')());
         }
     }
 
@@ -111,7 +108,7 @@ class Sessao
     /**
      * destroi uma ou todas as sessões
      * se passar a $chave, estão destruirá somente a sessão chamada
-     * @param type $chave =  chave de uma sessão
+     * @param string $chave =  chave de uma sessão
      */
     public static function destroy($chave = false)
     {

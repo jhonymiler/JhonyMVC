@@ -2,7 +2,10 @@
 
 require_once './vendor/autoload.php';
 
-use Core\{Sessao, Requisicao, App};
+use Core\Sessao;
+use Core\Requisicao;
+use Core\App;
+
 use Symfony\Component\Dotenv\Dotenv;
 
 define('DS', DIRECTORY_SEPARATOR); // para não dar conflito em sistemas que não são windows 
@@ -26,7 +29,7 @@ try {
 
     // Iinica o tratamento da requisicção do URL e armazena num objeto na sessão
     Sessao::init();
-    Sessao::set('Requisicao', new Requisicao);
+    Sessao::set('Requisicao', new Requisicao);               
     // Roda a aplicação 
     App::init(Sessao::get('Requisicao'));
 } catch (Exception $e) {

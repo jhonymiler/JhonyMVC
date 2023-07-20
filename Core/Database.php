@@ -13,7 +13,7 @@ class Database
          */
 
         /*try {
-            $this->con = new \PDO('mysql:host=' . MYSQL_HOST . ';dbname=' . MYSQL_BD, MYSQL_USER, MYSQL_SENHA);
+            $this->con = new \PDO('mysql:host=' . getenv('MYSQL_HOST') . ';dbname=' . MYSQL_BD, getenv('MYSQL_USER'), getenv('MYSQL_SENHA'));
             $this->con->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
             echo 'ERROR: ' . $e->getMessage();

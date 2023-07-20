@@ -70,10 +70,10 @@ abstract class Controller
     {
 
         if ($path == false) {
-            header('location:' . BASE_URL);
+            header('location:' . getenv('BASE_URL'));
             exit();
         } else {
-            header('location:' . BASE_URL . $path);
+            header('location:' . getenv('BASE_URL') . $path);
             exit();
         }
     }

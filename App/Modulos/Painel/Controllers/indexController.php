@@ -3,7 +3,7 @@
 namespace App\Modulos\Painel\Controllers;
 
 use App\Controllers\painelController;
-use App\Modulos\Painel\Models\userModel;
+use App\Modulos\Painel\Models\cursoModel;
 
 /**
  * Description of indexControle
@@ -12,17 +12,17 @@ use App\Modulos\Painel\Models\userModel;
  */
 class indexController extends painelController
 {
-    public $user;
+    public $curso;
 
     public function __construct()
     {
         parent::__construct();
-        $this->user  = new userModel;
+        $this->curso  = new cursoModel;
     }
 
     public function index()
     {
-        $this->_view->assign('titulo', 'Painel de Administração {' . $this->user->getNome() . '}');
+        $this->_view->assign('titulo', 'Painel de Administração ');
         $this->_view->addConteudo('dashboard');
         $this->_view->renderizar();
     }

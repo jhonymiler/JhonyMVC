@@ -22,16 +22,16 @@ try {
      */
 
     $dotenv = new Dotenv();
-    $dotenv->load(__DIR__ . '/.ENV');
+    $dotenv->load(__DIR__ . '/.env');
     foreach ($_ENV as $k => $v) {
-        define($k, $v);
+        putenv("$k=$v");
     }
 
     // Iinica o tratamento da requisicção do URL e armazena num objeto na sessão
     Sessao::init();
-    Sessao::set('Requisicao', new Requisicao);               
     // Roda a aplicação 
-    App::init(Sessao::get('Requisicao'));
+    App::init(Requisicao::getInstance());
+
 } catch (Exception $e) {
-    echo $e->getMessage();
+    throw new Exception($e->getMessage());
 }

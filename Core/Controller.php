@@ -50,7 +50,7 @@ abstract class Controller
             $campos = strip_tags($campos);
 
             if (!addslashes($campos)) {
-                $campos = mysqli_real_escape_string(mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME), $campos);
+                //$campos = mysqli_real_escape_string(mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME), $campos);
             }
             return trim($campos);
         }

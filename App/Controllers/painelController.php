@@ -14,10 +14,7 @@ class painelController extends Controller
     public function __construct()
     {
         parent::__construct();
-        if (!Sessao::get('logado')) {
-            $this->redir('login');
-            exit();
-        }
+       
     }
 
     public function index()

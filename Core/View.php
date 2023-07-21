@@ -22,7 +22,7 @@ class View extends Smarty
     public function __construct()
     {
         parent::__construct();
-        $this->_request   = Sessao::get('Requisicao');
+        $this->_request   = Requisicao::getInstance();
         $this->_js        = array();
         $this->_paths     = array();
         $this->_jsPlugin  = array();
@@ -52,7 +52,7 @@ class View extends Smarty
 
 
         if ($this->_request->getModulo()) {
-            $this->_paths['view'] = RAIZ . 'App' . DS . 'Modulos' . DS . $this->_request->getModulo() . DS . 'Views' . DS;
+            $this->_paths['view'] = RAIZ . 'App' . DS . 'Modulos' . DS . ucfirst($this->_request->getModulo()) . DS . 'Views' . DS;
         } else {
             $this->_paths['view'] = $this->_paths['template'];
         }
@@ -86,7 +86,7 @@ class View extends Smarty
             $template = $this->_paths['view'] . $args[0] . '.tpl';
         }
         if (func_num_args() >= 2) {
-            $template = RAIZ . 'App' . DS . 'Modulos' . DS . $this->_request->getModulo() . DS . 'Views' . DS . $args[0] . DS . $args[1] . '.tpl';
+            $template = $template = $this->_paths['view'] . $args[0] . DS . $args[1] . '.tpl';
         }
         // verifica se o caminh é válido
         if (!is_readable($template)) {

@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Symfony\Component\Dotenv\Dotenv;
+
 /**
  * Classe que desmembra a url passada para a chamada dos controles e modulos
  * do sistema
@@ -18,14 +20,31 @@ class Requisicao
     private $_argumentos;
     private $_modules;
 
-    public function __construct()
+    private static $instance = null;
+
+    private function __construct()
+    {
+        $this->parseUrl();
+        $this->setControllerAndModule();
+        $this->setDefaultControllerAndMethod();
+    }
+
+    public static function getInstance(): self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    private function parseUrl()
     {
         if (isset($_GET['url'])) {
             // Pega a url e ajuda a sanitizar 
             $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL);
             // Trata possíveis injections deixando apenas algumas pontuações e alfanumericos
             $url = preg_replace('/([^\.\-\_\/a-z0-9]+)/i', '', $url);
-            $url =  strtolower($url);
+            $url = strtolower($url);
             $url = explode('/', $url);
             $this->_navLinks = $url;
             $url = array_filter($url);
@@ -35,39 +54,30 @@ class Requisicao
             // lista os modulos da pasta modulos para verificação se o modulo passado
             // no url realmente existe dentro da pasta
             foreach (new \DirectoryIterator(RAIZ . "App" . DS . "Modulos") as $Files) {
-                if ($Files->isDir() && $Files->isDot()) {
-                    continue;
-                }
-                $this->_modules[] = strtolower($Files->getFilename());
-            }
-
-            // o último bloco do url é o módulo que queremos chamar
-            $this->_modulo = array_shift($url);
-
-            if (!$this->_modulo) {
-                $this->_modulo = false;
-            } else {
-                if (is_array($this->_modules)) {
-                    if (!in_array($this->_modulo, $this->_modules)) {
-                        $this->_Controller = $this->_modulo;
-                        $this->_modulo = false;
-                    } else {
-                        $this->_Controller = strtolower(array_shift($url));
-
-                        if (!$this->_Controller) {
-                            $this->_Controller = 'index';
-                        }
-                    }
-                } else {
-                    $this->_Controller = $this->_modulo;
-                    $this->_modulo = false;
+                if ($Files->isDir() && !$Files->isDot()) {
+                    $this->_modules[] = strtolower($Files->getFilename());
                 }
             }
-
-            $this->_metodo = strtolower(array_shift($url));
-            $this->_argumentos = $url;
         }
+    }
 
+    private function setControllerAndModule()
+    {
+        if (!empty($this->_navLinks)) {
+            $this->_modulo = array_shift($this->_navLinks);
+
+            if ($this->_modulo) {
+                $this->_Controller = strtolower(array_shift($this->_navLinks) ?? '');
+
+                if (!$this->_Controller) {
+                    $this->_Controller = 'index';
+                }
+            }
+        }
+    }
+
+    private function setDefaultControllerAndMethod()
+    {
         if (!$this->_Controller) {
             $this->_Controller = getenv('CONTROLE_PATRAO');
         }

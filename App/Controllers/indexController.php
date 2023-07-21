@@ -4,8 +4,6 @@ namespace App\Controllers;
 
 use Core\Controller;
 
-
-
 /**
  * Description of indexControle
  *
@@ -24,4 +22,6 @@ class indexController extends Controller
         $this->_view->addConteudo('home');
         $this->_view->renderizar();
     }
+
+ 
 }

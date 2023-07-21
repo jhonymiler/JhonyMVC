@@ -8,6 +8,7 @@ abstract class Model
 
     public function __construct()
     {
-        $this->db = new Database;
+        $db = new Database();
+        $this->db = $db->con;
     }
 }

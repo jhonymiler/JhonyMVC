@@ -4,15 +4,17 @@ namespace App\Modulos\Painel\Models;
 
 use Core\Model;
 
-class userModel extends Model
+class cursoModel extends Model
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function getNome()
+    public function list()
     {
-        return "Usuário Fulano";
+        // PDO
+        $this->db->query("SELECT * FROM cursos");
+
     }
 }

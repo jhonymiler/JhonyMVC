@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+    image: cadastro-cursos
+    container_name: cadastro-cursos
+    environment:
+      PHP_IDE_CONFIG: 'serverName=integration'
+    ports:
+      - "8080:80"
+    expose:
+    #   - 9001
+      - 9003
+    # network_mode: host
+    volumes:
+      - .:/var/www/html
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+     
